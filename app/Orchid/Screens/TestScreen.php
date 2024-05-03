@@ -54,7 +54,7 @@ class TestScreen extends Screen
             Layout::rows([
                 Input::make('test2'),
                 EditorJSField::make('test')->containerid('editorjs'),
-                Button::make('Test')->method('test'),
+                Button::make('Сохранить')->method('test'),
             ])
         ];
     }

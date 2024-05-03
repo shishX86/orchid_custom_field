@@ -4,6 +4,7 @@ import RawTool from '@editorjs/raw';
 import SimpleImage from "@editorjs/simple-image";
 import DragDrop from 'editorjs-drag-drop';
 import TestTool from './../editorjs/TestTool'
+import RepeaterTool from './../editorjs/RepeaterTool'
 
 export default class extends window.Controller {
     connect() {
@@ -22,6 +23,7 @@ export default class extends window.Controller {
                 },
                 raw: RawTool,
                 image: TestTool,
+                repeater: RepeaterTool
             },
 
             onReady: () => {

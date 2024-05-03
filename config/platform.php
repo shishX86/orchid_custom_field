@@ -143,6 +143,7 @@ return [
      */
 
     'vite' => [
+        'resources/css/app.css',
         'resources/js/dashboard.js'
     ],
 
