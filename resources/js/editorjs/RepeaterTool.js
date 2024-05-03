@@ -33,7 +33,7 @@ export default class RepeaterTool {
         this.template = `
             <div class="vdnh-list__item">
                 <div class="vdnh-list__cell vdnh-list__cell--img">
-                    <input data-id="file" type="file">
+                    <input data-id="file" type="file" name="file[]">
                 </div>
                 <div class="vdnh-list__cell vdnh-list__cell--title">
                     <input data-id="name" placeholder="Введите имя" value="" type="text">
@@ -108,8 +108,9 @@ export default class RepeaterTool {
             const name = el.querySelector('[data-id="name"]')?.value
             const link = el.querySelector('[data-id="link"]')?.value
             const description = el.querySelector('[data-id="description"]')?.value
+            const file = el.querySelector('[data-id="file"]')?.value
 
-            output.push({name, link, description})
+            output.push({name, link, description, file})
         })
 
         return output
