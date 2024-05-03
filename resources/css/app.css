@@ -7,6 +7,10 @@
     background-color: #f8f9fa;
 }
 
+.codex-editor__redactor {
+    padding-bottom: 0 !important;
+}
+
 .vdnh-list__item {
     display: flex;
 }

@@ -15,6 +15,7 @@
         "@editorjs/editorjs": "^2.29.1",
         "@editorjs/header": "^2.8.1",
         "@editorjs/raw": "^2.5.0",
-        "@editorjs/simple-image": "^1.6.0"
+        "@editorjs/simple-image": "^1.6.0",
+        "sortablejs": "^1.15.2"
     }
 }

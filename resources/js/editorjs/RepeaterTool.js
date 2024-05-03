@@ -1,3 +1,5 @@
+import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
+
 export default class RepeaterTool {
     static get toolbox() {
         return {
@@ -27,22 +29,27 @@ export default class RepeaterTool {
         this.data = data;
         this.wrapper = null;
         this.container = null;
+        this.sortable = null;
         this.template = `
             <div class="vdnh-list__item">
                 <div class="vdnh-list__cell vdnh-list__cell--img">
                     <input data-id="file" type="file">
                 </div>
                 <div class="vdnh-list__cell vdnh-list__cell--title">
-                    <input data-id="name" placeholder="Введите имя" type="text">
+                    <input data-id="name" placeholder="Введите имя" value="" type="text">
                 </div>
                 <div class="vdnh-list__cell vdnh-list__cell--link">
-                    <input data-id="link" placeholder="Введите ccskre" type="text">
+                    <input data-id="link" placeholder="Введите ccskre" value="" type="text">
                 </div>
                 <div class="vdnh-list__cell vdnh-list__cell--description">
-                    <textarea data-id="description" placeholder="Описание"></textarea>
+                    <input data-id="description" placeholder="Описание" value="" type="text"/>
                 </div>
                 <div class="vdnh-list__cell vdnh-list__cell--btns">
-                    <button class="vdnh-list__del" type="button">Удалить</button>
+                    <button class="vdnh-list__del" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         `;
@@ -62,6 +69,7 @@ export default class RepeaterTool {
         this.container = document.createElement('div');
         this.container.classList.add('vdnh-list');
         this.wrapper.appendChild(this.container);
+        this.sortable = Sortable.create(this.container);
 
         this.addRow();
     }
