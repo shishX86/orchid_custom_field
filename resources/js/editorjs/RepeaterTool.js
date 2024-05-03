@@ -33,7 +33,9 @@ export default class RepeaterTool {
         this.template = `
             <div class="vdnh-list__item">
                 <div class="vdnh-list__cell vdnh-list__cell--img">
-                    <input data-id="file" type="file" name="file[]">
+                    <div>
+                        <input data-id="file" type="file" name="file[]">
+                    </div>
                 </div>
                 <div class="vdnh-list__cell vdnh-list__cell--title">
                     <input data-id="name" placeholder="Введите имя" value="" type="text">
@@ -78,12 +80,26 @@ export default class RepeaterTool {
         this.container.insertAdjacentHTML('beforeend', this.template)
         const row = this.container.lastElementChild
         const delBtn = row?.querySelector('.vdnh-list__del');
+        const file = row?.querySelector('[data-id="file"]');
 
         if(!delBtn) return;
 
         delBtn.onclick = () => {
             row.remove();
         }
+
+        file.onchange = (e) => {
+            if (e.target.files && e.target.files[0]) {
+                const fileCont = row.querySelector('.vdnh-list__cell--img')
+                const img = fileCont.querySelector('img')
+
+                if(img) img.remove()
+
+                fileCont.insertAdjacentHTML('beforeend', `
+                    <img width="100" src="${URL.createObjectURL(e.target.files[0])}">
+                `)
+            }
+        } 
     }
 
     createBtns() {
