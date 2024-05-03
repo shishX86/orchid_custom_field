@@ -3,6 +3,7 @@ import Header from '@editorjs/header';
 import RawTool from '@editorjs/raw';
 import SimpleImage from "@editorjs/simple-image";
 import DragDrop from 'editorjs-drag-drop';
+import TestTool from './../editorjs/TestTool'
 
 export default class extends window.Controller {
     connect() {
@@ -20,8 +21,7 @@ export default class extends window.Controller {
                     inlineToolbar: ['link']
                 },
                 raw: RawTool,
-                image: SimpleImage,
-
+                image: TestTool,
             },
 
             onReady: () => {
