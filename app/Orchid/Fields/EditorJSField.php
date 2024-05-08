@@ -6,7 +6,7 @@ namespace App\Orchid\Fields;
 use Orchid\Screen\Field;
 
 class EditorJSField extends Field {
-    protected $view = 'fields.editor';
+    protected $view = 'fields.vue-editor';
 
     protected $attributes = [
         'readOnly' => false,

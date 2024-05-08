@@ -16,6 +16,8 @@
         "@editorjs/header": "^2.8.1",
         "@editorjs/raw": "^2.5.0",
         "@editorjs/simple-image": "^1.6.0",
-        "sortablejs": "^1.15.2"
+        "@vitejs/plugin-vue": "^5.0.4",
+        "sortablejs": "^1.15.2",
+        "vuedraggable": "^4.1.0"
     }
 }
