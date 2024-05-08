@@ -18,6 +18,7 @@
         "@editorjs/simple-image": "^1.6.0",
         "@vitejs/plugin-vue": "^5.0.4",
         "sortablejs": "^1.15.2",
+        "vue": "^3.4.27",
         "vuedraggable": "^4.1.0"
     }
 }
