@@ -17,11 +17,7 @@ export default class extends window.Controller {
             holder: id,
 
             tools: {
-                header: {
-                    class: Header,
-                    inlineToolbar: ['link']
-                },
-                raw: RawTool,
+                paragraph: false,
                 image: TestTool,
                 repeater: RepeaterTool
             },
@@ -36,7 +32,9 @@ export default class extends window.Controller {
                 }).catch((error) => {
                     console.log('Saving failed: ', error)
                 });
-            }
+            },
+
+            defaultBlock: "repeater"
         });
     }
 }

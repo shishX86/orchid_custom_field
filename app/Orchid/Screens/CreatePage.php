@@ -2,14 +2,12 @@
 
 namespace App\Orchid\Screens;
 
-use App\Orchid\Fields\EditorJSField;
+use App\Orchid\Fields\PageConstructor;
 use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
-use Illuminate\Http\Request;
 
-class TestScreen extends Screen
+class CreatePage extends Screen
 {
     /**
      * Fetch data to be displayed on the screen.
@@ -18,9 +16,7 @@ class TestScreen extends Screen
      */
     public function query(): iterable
     {
-        return [
-            'data' => 'test'
-        ];
+        return [];
     }
 
     /**
@@ -30,7 +26,7 @@ class TestScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'TestScreen';
+        return 'Создание страницы';
     }
 
     /**
@@ -38,7 +34,7 @@ class TestScreen extends Screen
      *
      * @return \Orchid\Screen\Action[]
      */
-    public function commandBar() : array
+    public function commandBar(): iterable
     {
         return [];
     }
@@ -52,15 +48,9 @@ class TestScreen extends Screen
     {
         return [
             Layout::rows([
-                Input::make('test2'),
-                EditorJSField::make('test')->containerid('editorjs'),
-                Button::make('Сохранить')->method('test'),
+                PageConstructor::make('editor'),
+                Button::make('Сохранить')->method('save'),
             ])
         ];
-    }
-
-    public function test(Request $request): void
-    {
-        dd($request->all());
     }
 }

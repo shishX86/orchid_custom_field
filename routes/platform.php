@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\CreateFields;
+use App\Orchid\Screens\CreatePage;
 use App\Orchid\Screens\Examples\ExampleActionsScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
@@ -36,8 +38,11 @@ use Tabuna\Breadcrumbs\Trail;
 Route::screen('/main', PlatformScreen::class)
     ->name('platform.main');
 
-Route::screen('/test', TestScreen::class)
-    ->name('platform.test');
+Route::screen('/fields/create', CreateFields::class)
+    ->name('platform.fields.create');
+
+Route::screen('/pages/create', CreatePage::class)
+    ->name('platform.pages.create');
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)

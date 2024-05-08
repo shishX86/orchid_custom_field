@@ -25,8 +25,9 @@ export default class RepeaterTool {
         };
     }
 
-    constructor({ data }) {
+    constructor({ data, api }) {
         this.data = data;
+        this.api = api;
         this.wrapper = null;
         this.container = null;
         this.sortable = null;
@@ -34,7 +35,7 @@ export default class RepeaterTool {
             <div class="vdnh-list__item">
                 <div class="vdnh-list__cell vdnh-list__cell--img">
                     <div>
-                        <input data-id="file" type="file" name="file[]">
+                        <input data-id="file" type="file" name="files[]">
                     </div>
                 </div>
                 <div class="vdnh-list__cell vdnh-list__cell--title">
@@ -58,6 +59,8 @@ export default class RepeaterTool {
     }
 
     render() {
+        console.log(this.api.blocks.getCurrentBlockIndex())
+
         this.wrapper = document.createElement('div');
         this.wrapper.classList.add('vdnh-component');
         
