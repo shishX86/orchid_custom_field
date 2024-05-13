@@ -4,6 +4,7 @@ namespace App\Orchid\Resources;
 
 use App\Models\Posttype;
 use App\Orchid\Fields\PageConstructor;
+use App\Orchid\Filters\PostFilter;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Crud\Resource;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Sight;
 use Orchid\Screen\TD;
+use Orchid\Support\Facades\Dashboard;
 
 class PostResource extends Resource
 {
@@ -92,7 +94,9 @@ class PostResource extends Resource
      */
     public function filters(): array
     {
-        return [];
+        return [
+            new PostFilter('event')
+        ];
     }
 
     /**

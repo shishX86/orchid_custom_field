@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid;
 
+use App\Models\Posttype;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
@@ -33,14 +34,21 @@ class PlatformProvider extends OrchidServiceProvider
      */
     public function menu(): array
     {
+        $posttypes = Posttype::all();
+
+        $postList = $posttypes->map(function($posttype, $key) {
+            return Menu::make($posttype->name)
+                ->icon('bs.book')
+                ->url('/admin/crud/list/post-resources?posttype='.$posttype->slug);
+            })
+            ->toArray();
+
+        $menu = Menu::make('Контент')
+            ->icon('code')
+            ->list($postList);
+
         return [
-            Menu::make('Создание полей')
-                ->icon('bs.book')
-                ->route('platform.fields.create'),
-            
-            Menu::make('Конструктор страницы')
-                ->icon('bs.book')
-                ->route('platform.pages.create'),
+            $menu
         ];
     }
 
