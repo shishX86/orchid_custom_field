@@ -27,12 +27,12 @@ class PostResource extends Resource
 
     public static function singularLabel(): string
     {
-        return 'Пост';
+        return 'Страница';
     }
 
     public static function label(): string
     {
-        return 'Посты';
+        return 'Страницы';
     }
 
     /**
