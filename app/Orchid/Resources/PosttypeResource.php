@@ -2,32 +2,28 @@
 
 namespace App\Orchid\Resources;
 
-use App\Models\Post;
-use App\Models\Posttype;
-use App\Orchid\Fields\EditorJSField;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Sight;
 use Orchid\Screen\TD;
-use Orchid\Screen\Fields\Relation;
 
-class FieldResource extends Resource
+class PosttypeResource extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Field::class;
+    public static $model = \App\Models\Posttype::class;
 
     public static function singularLabel(): string
     {
-        return 'Поле';
+        return 'Тип поста';
     }
 
     public static function label(): string
     {
-        return 'Поля';
+        return 'Типы постов';
     }
 
     /**
@@ -38,20 +34,8 @@ class FieldResource extends Resource
     public function fields(): array
     {
         return [
-            Input::make('name')->title('Название набора'),
-            Select::make('select')
-                ->options([
-                    'index'   => 'Пост',
-                    'noindex' => 'Глобально',
-                ])
-                ->title('Область видимости'),
-
-            Relation::make('display')
-                ->fromModel(Post::class, 'name')
-                ->title('Отобразить на страницах'),
-
-            EditorJSField::make('editor')
-                ->containerid('editorjs')
+            Input::make('name')->title('Название типа поста'),
+            Input::make('slug')->title('Символьный код поста')
         ];
     }
 
@@ -65,7 +49,7 @@ class FieldResource extends Resource
         return [
             TD::make('id'),
             TD::make('name', 'Название'),
-            TD::make('type', 'Видимость')
+            TD::make('slug', 'Символьный код'),
         ];
     }
 
@@ -76,7 +60,11 @@ class FieldResource extends Resource
      */
     public function legend(): array
     {
-        return [];
+        return [
+            Sight::make('id'),
+            Sight::make('name', 'Название'),
+            Sight::make('slug', 'Символьный код'),
+        ];
     }
 
     /**

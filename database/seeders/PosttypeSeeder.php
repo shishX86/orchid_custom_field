@@ -15,8 +15,8 @@ class PosttypeSeeder extends Seeder
     {
         $this->create('page', 'Страница');
         $this->create('event', 'Событие');
-        $this->create('news', 'Новости');
-        $this->create('article', 'Статьи');
+        $this->create('news', 'Новость');
+        $this->create('article', 'Статья');
     }
 
     private function create(string $slug, string $title): void {
