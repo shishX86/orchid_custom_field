@@ -2,9 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Field;
+use App\Models\Post;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +17,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        if(Field::count() === 0) {
+            $this->command->info("Наполнения полей");
+            Field::factory(10)->create();
+            $this->command->info("Готово!");
+        }
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        if(Post::count() === 0) {
+            $this->command->info("Наполнения постов");
+            Post::factory(10)->create();
+            $this->command->info("Готово!");
+        }
+
+        if(DB::table('field_post')->count() === 0) {
+            $this->command->info("Наполнения связей постов с полями");
+            $this->call(FieldPostSeeder::class);
+            $this->command->info("Готово!");
+        }
+
+        if(User::where('email', 'admin@admin.com')->count() === 0) {
+            $this->command->info("Создание админа");
+            Artisan::call('orchid:admin admin admin@admin.com password');
+        }
     }
 }
