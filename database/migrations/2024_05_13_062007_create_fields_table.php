@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('slug');
-            $table->string('type')->default('local');
             $table->json('content')->nullable();
             $table->timestamps();
         });

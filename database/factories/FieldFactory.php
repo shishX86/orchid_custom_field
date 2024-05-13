@@ -17,7 +17,7 @@ class FieldFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->realText(50),
             'slug' => $this->faker->slug(2),
             'content' => json_encode([
                 'test' => 'test'

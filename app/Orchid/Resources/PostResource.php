@@ -2,8 +2,11 @@
 
 namespace App\Orchid\Resources;
 
+use App\Orchid\Fields\PageConstructor;
 use Orchid\Crud\Resource;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\TD;
+use Orchid\Support\Facades\Layout;
 
 class PostResource extends Resource
 {
@@ -31,7 +34,10 @@ class PostResource extends Resource
      */
     public function fields(): array
     {
-        return [];
+        return [
+            PageConstructor::make('editor'),
+            Button::make('Сохранить')->method('save'),
+        ];
     }
 
     /**
@@ -43,16 +49,10 @@ class PostResource extends Resource
     {
         return [
             TD::make('id'),
-
-            TD::make('created_at', 'Date of creation')
-                ->render(function ($model) {
-                    return $model->created_at->toDateTimeString();
-                }),
-
-            TD::make('updated_at', 'Update date')
-                ->render(function ($model) {
-                    return $model->updated_at->toDateTimeString();
-                }),
+            TD::make('name', 'Название'),
+            TD::make('posttype', 'Тип поста')->render(function($model) {
+                return $model->posttype->name;
+            }),
         ];
     }
 

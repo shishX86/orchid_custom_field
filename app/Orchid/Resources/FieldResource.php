@@ -43,16 +43,7 @@ class FieldResource extends Resource
     {
         return [
             TD::make('id'),
-
-            TD::make('created_at', 'Date of creation')
-                ->render(function ($model) {
-                    return $model->created_at->toDateTimeString();
-                }),
-
-            TD::make('updated_at', 'Update date')
-                ->render(function ($model) {
-                    return $model->updated_at->toDateTimeString();
-                }),
+            TD::make('name', 'Название')
         ];
     }
 

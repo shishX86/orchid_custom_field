@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Posttype;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +18,9 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->text(),
+            'name' => $this->faker->realText(50),
             'description' => $this->faker->realText(),
-            'type' => 'page',
+            'posttype_id' => Posttype::inRandomOrder()->first()->id,
             'content' => json_encode([
                 'test' => 'test'
             ]),

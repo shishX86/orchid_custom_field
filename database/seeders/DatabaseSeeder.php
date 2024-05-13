@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Field;
 use App\Models\Post;
+use App\Models\Posttype;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,6 +18,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(PosttypeSeeder::class);
+
         if(Field::count() === 0) {
             $this->command->info("Наполнения полей");
             Field::factory(10)->create();
