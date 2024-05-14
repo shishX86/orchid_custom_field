@@ -18,12 +18,12 @@ class PosttypeResource extends Resource
 
     public static function singularLabel(): string
     {
-        return 'Тип поста';
+        return 'Тип страницы';
     }
 
     public static function label(): string
     {
-        return 'Типы постов';
+        return 'Типы страниц';
     }
 
     /**

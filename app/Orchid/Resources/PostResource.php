@@ -110,4 +110,14 @@ class PostResource extends Resource
         dd($request->all());
         // $model->forceFill($request->all())->save();
     }
+
+    /**
+     * Get the resource should be displayed in the navigation
+     *
+     * @return bool
+     */
+    public static function displayInNavigation(): bool
+    {
+        return false;
+    }
 }

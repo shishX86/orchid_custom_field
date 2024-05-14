@@ -22,12 +22,12 @@ class FieldResource extends Resource
 
     public static function singularLabel(): string
     {
-        return 'Поле';
+        return 'Компонент';
     }
 
     public static function label(): string
     {
-        return 'Поля';
+        return 'Компоненты';
     }
 
     /**
