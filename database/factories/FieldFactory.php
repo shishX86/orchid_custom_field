@@ -16,8 +16,10 @@ class FieldFactory extends Factory
      */
     public function definition(): array
     {
+        $titles = ['Компонент FAQ', 'Слайдер Базовый', 'Баннер Базовый', 'Баннер со слайдером'];
+
         return [
-            'name' => $this->faker->realText(50),
+            'name' => $this->faker->randomElement($titles),
             'slug' => $this->faker->slug(2),
             'content' => json_encode([
                 'test' => 'test'

@@ -22,13 +22,14 @@ class DatabaseSeeder extends Seeder
 
         if(Field::count() === 0) {
             $this->command->info("Наполнения полей");
-            Field::factory(10)->create();
+            Field::factory(5)->create();
             $this->command->info("Готово!");
         }
 
         if(Post::count() === 0) {
             $this->command->info("Наполнения постов");
-            Post::factory(10)->create();
+            //Post::factory(10)->create();
+            $this->call(PostSeeder::class);
             $this->command->info("Готово!");
         }
 

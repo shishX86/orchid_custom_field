@@ -46,10 +46,6 @@ class FieldResource extends Resource
                 ])
                 ->title('Область видимости'),
 
-            Relation::make('display')
-                ->fromModel(Post::class, 'name')
-                ->title('Отобразить на страницах'),
-
             EditorJSField::make('editor')
                 ->containerid('editorjs')
         ];

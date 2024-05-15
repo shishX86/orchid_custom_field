@@ -19,6 +19,7 @@ class PostFactory extends Factory
     {
         return [
             'name' => $this->faker->realText(50),
+            'slug' => $this->faker->slug(2),
             'description' => $this->faker->realText(),
             'posttype_id' => Posttype::inRandomOrder()->first()->id,
             'content' => json_encode([

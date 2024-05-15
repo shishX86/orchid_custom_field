@@ -61,7 +61,7 @@ class PostResource extends Resource
     {
         return [
             TD::make('id'),
-            TD::make('name', 'Название'),
+            TD::make('name', 'Название')->width(350),
             TD::make('posttype', 'Тип поста')->render(function($model) {
                 return $model->posttype->name;
             }),
@@ -77,9 +77,10 @@ class PostResource extends Resource
     {
         return [
             Sight::make('name', 'Название'),
-            Sight::make('posttype_id', 'Тип поста')->render(function($model) {
-                return $model->posttype->name;
-            }),
+            Sight::make('posttype_id', 'Тип поста')
+                ->render(function($model) {
+                    return $model->posttype->name;
+                }),
             Sight::make('description', 'Описание'),
             Sight::make('content', 'Набор полей')->render(function($model) {
                 return $model->content;
