@@ -41,8 +41,8 @@ class FieldResource extends Resource
             Input::make('name')->title('Название набора'),
             Select::make('visibility')
                 ->options([
-                    'index'   => 'Пост',
-                    'noindex' => 'Глобально',
+                    'local'   => 'Локально',
+                    'global' => 'Глобально',
                 ])
                 ->title('Область видимости'),
 
