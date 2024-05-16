@@ -39,7 +39,7 @@ class FieldResource extends Resource
     {
         return [
             Input::make('name')->title('Название набора'),
-            Select::make('select')
+            Select::make('visibility')
                 ->options([
                     'index'   => 'Пост',
                     'noindex' => 'Глобально',
@@ -61,7 +61,12 @@ class FieldResource extends Resource
         return [
             TD::make('id'),
             TD::make('name', 'Название'),
-            TD::make('type', 'Видимость')
+            TD::make('visibility', 'Видимость')
+                ->render(function($model) {
+                    return ($model->visibility === 'global')
+                        ? 'Глобальная'
+                        : 'Локальная';
+                })
         ];
     }
 

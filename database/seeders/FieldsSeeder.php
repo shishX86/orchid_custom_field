@@ -16,7 +16,8 @@ class FieldsSeeder extends Seeder
         DB::table('fields')->insert([
             [
                 'name' => 'Хэдер',
-                'slug' => 'home',
+                'slug' => 'header',
+                'visibility' => 'global',
                 'content' => json_encode([
                     'test' => 'test'
                 ]),
@@ -25,7 +26,8 @@ class FieldsSeeder extends Seeder
             ],
             [
                 'name' => 'Футер',
-                'slug' => 'home',
+                'slug' => 'footer',
+                'visibility' => 'global',
                 'content' => json_encode([
                     'test' => 'test'
                 ]),
@@ -34,7 +36,8 @@ class FieldsSeeder extends Seeder
             ],
             [
                 'name' => 'Слайдер',
-                'slug' => 'home',
+                'slug' => 'slider',
+                'visibility' => 'local',
                 'content' => json_encode([
                     'test' => 'test'
                 ]),
@@ -43,7 +46,8 @@ class FieldsSeeder extends Seeder
             ],
             [
                 'name' => 'FAQ',
-                'slug' => 'home',
+                'slug' => 'faq',
+                'visibility' => 'local',
                 'content' => json_encode([
                     'test' => 'test'
                 ]),
@@ -53,6 +57,7 @@ class FieldsSeeder extends Seeder
             [
                 'name' => 'Баннер',
                 'slug' => 'home',
+                'visibility' => 'local',
                 'content' => json_encode([
                     'test' => 'test'
                 ]),
