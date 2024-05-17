@@ -83,7 +83,10 @@ class PostResource extends Resource
                 }),
             Sight::make('description', 'Описание'),
             Sight::make('content', 'Набор полей')->render(function($model) {
-                return $model->content;
+                $fields = $model->fields;
+                $output = $fields->map(fn($field) => $field->name)->toArray();
+
+                return implode(', ', $output);
             }),
         ];
     }

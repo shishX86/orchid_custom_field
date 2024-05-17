@@ -14,6 +14,10 @@ class Post extends Model
 {
     use HasFactory, AsSource, Filterable, Attachable;
 
+    protected $with = [
+        'fields'
+    ];
+
     public function fields(): BelongsToMany
     {
         return $this->belongsToMany(Field::class);

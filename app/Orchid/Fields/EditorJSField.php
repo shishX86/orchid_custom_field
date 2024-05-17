@@ -7,15 +7,4 @@ use Orchid\Screen\Field;
 
 class EditorJSField extends Field {
     protected $view = 'fields.vue-editor';
-
-    protected $attributes = [
-        'readOnly' => false,
-        'containerid' => 'editorjs'
-    ];
-
-    protected $inlineAttributes = [
-        'title',
-        'name',
-        'readonly'
-    ];
 }

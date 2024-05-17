@@ -45,6 +45,10 @@ class FieldResource extends Resource
                     'global' => 'Глобально',
                 ])
                 ->title('Область видимости'),
+            
+            Relation::make('posttype')
+                ->fromModel(Po)
+                ->title('Область видимости'),
 
             EditorJSField::make('editor')
                 ->containerid('editorjs')
