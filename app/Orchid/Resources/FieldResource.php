@@ -41,14 +41,20 @@ class FieldResource extends Resource
             Input::make('name')->title('Название набора'),
             Select::make('visibility')
                 ->options([
-                    'local'   => 'Локально',
-                    'global' => 'Глобально',
+                    'local'   => 'Локальный',
+                    'global' => 'Сквозной',
                 ])
                 ->title('Область видимости'),
             
-            Relation::make('posttype')
-                ->fromModel(Po)
-                ->title('Область видимости'),
+            Select::make('posttypes')
+                ->fromModel(Posttype::class, 'name')
+                ->empty('На всех')
+                ->title('Отображать на типах страниц'),
+
+            Select::make('posts2')
+                ->fromModel(Post::class, 'name')
+                ->empty('На всех')
+                ->title('Отображать на конкретных страницах'),
 
             EditorJSField::make('editor')
                 ->containerid('editorjs')
@@ -68,8 +74,8 @@ class FieldResource extends Resource
             TD::make('visibility', 'Видимость')
                 ->render(function($model) {
                     return ($model->visibility === 'global')
-                        ? 'Глобальная'
-                        : 'Локальная';
+                        ? 'Сквозной'
+                        : 'Локальный';
                 })
         ];
     }
