@@ -44,14 +44,17 @@ class PlatformProvider extends OrchidServiceProvider
             })
             ->toArray();
 
-        $menu = Menu::make('Контент')
-            ->icon('code')
-            ->active('*/admin/crud/list/post-resources*')
-            ->list($postList);
+        $menu = [
+            Menu::make('Контент')
+                ->icon('code')
+                ->active('*/admin/crud/list/post-resources*')
+                ->list($postList),
 
-        return [
-            $menu
+            Menu::make('Сквозные блоки')
+            ->icon('code')
         ];
+
+        return $menu;
     }
 
     /**

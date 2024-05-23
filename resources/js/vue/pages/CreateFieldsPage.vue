@@ -6,60 +6,67 @@ const selectedField = ref('');
 const slVueTree = ref();
 
 const fields = ref([
-    { id: 1, value: 'text', title: 'Текстовое поле', isLeaf: true },
-    { id: 2, value: 'textarea', title: 'Область текста', isLeaf: true },
-    { id: 3, value: 'quil', title: 'Визуальный редактор', isLeaf: true },
-    { id: 4, value: 'editorjs', title: 'Блочный редактор', isLeaf: true },
-    { id: 5, value: 'image', title: 'Изображение', isLeaf: true },
-    { id: 6, value: 'gallery', title: 'Галерея', isLeaf: true },
-    { id: 7, value: 'phone', title: 'Телефон', isLeaf: true },
-    { id: 8, value: 'email', title: 'Email', isLeaf: true },
-    { id: 9, value: 'map', title: 'Карта', isLeaf: true },
-    { id: 10, value: 'repeater', title: 'Повторитель полей', isLeaf: false },
-    { id: 11, value: 'group', title: 'Группа полей', isLeaf: false },
+    { id: 1, value: 'text', title: 'Текстовое поле', isLeaf: true, data: {id: 1} },
+    { id: 2, value: 'textarea', title: 'Область текста', isLeaf: true, data: {id: 2} },
+    { id: 3, value: 'quil', title: 'Визуальный редактор', isLeaf: true, data: {id: 3} },
+    { id: 4, value: 'editorjs', title: 'Блочный редактор', isLeaf: true, data: {id: 4} },
+    { id: 5, value: 'image', title: 'Изображение', isLeaf: true, data: {id: 5} },
+    { id: 6, value: 'gallery', title: 'Галерея', isLeaf: true, data: {id: 6} },
+    { id: 7, value: 'phone', title: 'Телефон', isLeaf: true, data: {id: 7} },
+    { id: 8, value: 'email', title: 'Email', isLeaf: true, data: {id: 8} },
+    { id: 9, value: 'map', title: 'Карта', isLeaf: true, data: {id: 9} },
+    { id: 10, value: 'repeater', title: 'Повторитель полей', isLeaf: false, data: {id: 10} },
+    { id: 11, value: 'group', title: 'Группа полей', isLeaf: false, data: {id: 11} },
 ]);
 
 const nodes = ref([]);
+const isDropDownOpen = ref(false);
 
-const add = () => {
-    const field = fields.value.find((item) => item.id === selectedField.value);
-    if(!field) return;
 
+const addNewField = (field) => {
     nodes.value.push(field);
-    selectedField.value = '';
+}
+
+const selectField = () => {
+    isDropDownOpen.value = !isDropDownOpen.value;
 }
 
 const remove = (node) => {
-    console.log(node.path)
     slVueTree.value.remove([node.path]);
 }
+
+const inputKey = (node, e) => {
+    slVueTree.value.updateNode({path:node.path, patch: {data: {key : e.target.value}}})
+}
+
 </script>
 
 <template>
     <h2 class="b-title">Конструктор компонента</h2>
 
-    <div class="b-field-selecter">
-        <div class="b-field-selecter__cont">
-            <select 
-                class="b-field-selecter__select" 
-                v-model="selectedField">
-    
-                <option value="" disabled selected>
-                    Выберите поле и нажмите добавить
-                </option>
-    
-                <option :value="item.id" v-for="item in fields">
-                    {{ item.title }}
-                </option>
-            </select>
-        </div>
-
-        <button type="button" @click="add" class="b-mainbtn">
-            Добавить
+    <div class="b-field-add">
+        <button type="button" @click="selectField" class="b-mainbtn">
+            + добавить поле 
+            <span class="b-mainbtn__arrow" :class="{'b-mainbtn__arrow--invert': isDropDownOpen}">
+                <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.7071 14.7071C12.3166 15.0976 11.6834 15.0976 11.2929 14.7071L6.29289 9.70711C5.90237 9.31658 5.90237 8.68342 6.29289 8.29289C6.68342 7.90237 7.31658 7.90237 7.70711 8.29289L12 12.5858L16.2929 8.29289C16.6834 7.90237 17.3166 7.90237 17.7071 8.29289C18.0976 8.68342 18.0976 9.31658 17.7071 9.70711L12.7071 14.7071Z" fill="#000000"/>
+                </svg>
+            </span>
         </button>
+
+        <div class="b-field-add__menu" v-if="isDropDownOpen">
+            <button 
+                type="button" 
+                @click="addNewField(field)" 
+                class="b-mainbtn b-mainbtn--secondry b-mainbtn--small" 
+                v-for="field in fields">
+
+                {{ field.title }}
+            </button>
+        </div>
     </div>
 
-    <sl-vue-tree-next ref="slVueTree" v-model="nodes" class="b-field-diplayer">
+    <sl-vue-tree-next ref="slVueTree" v-model="nodes" class="b-field-diplayer" v-if="nodes.length">
         <template #title="{ node }">
             <div 
                 class="b-field-diplayer__node"
@@ -67,6 +74,10 @@ const remove = (node) => {
 
                 <div class="b-field-diplayer__title">
                     {{ node.title }}
+                </div>
+
+                <div>
+                    <input type="text" @input="inputKey(node, $event)" placeholder="Ключ поля" >
                 </div>
 
                 <button type="button" @click="remove(node)" class="b-iconbtn">
@@ -77,6 +88,10 @@ const remove = (node) => {
             </div>
         </template>
     </sl-vue-tree-next>
+
+    <div v-if="!nodes.length">
+        Поля пока не добавлены
+    </div>
 </template>
 
 <style>
@@ -166,37 +181,44 @@ const remove = (node) => {
         display: none;
     }
 
-    /* SELECT */
-    .b-field-selecter {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-
-    .b-field-selecter__cont {
-        padding-right: 12px;
-        background-color: #EFF2F7;
-        border-radius: 10px;
-        transition: background-color .3s ease-in-out;
-    }
-
-    .b-field-selecter__cont:hover {
-        background-color: #e6e9ed;
-    }
-
-    .b-field-selecter__select {
-        border: none;
-        cursor: pointer;
-        background-color: transparent;
-        padding: 12px 5px 12px 12px;
-    }
-
     .b-mainbtn {
         border: none;
         border-radius: 10px;
         background: #D3112B;
         color: #fff;
+        height: 40px;
         padding: 0 20px;
+        transition: transform .3s ease-in-out;
+    }
+
+    .b-mainbtn__arrow {
+        position: relative;
+    }
+    
+    .b-mainbtn__arrow > svg {
+        transition: transform .2s ease-in-out;
+    }
+
+    .b-mainbtn__arrow > svg path {
+        fill: #fff;
+    }
+
+    .b-mainbtn__arrow--invert > svg {
+        transform: rotate(180deg);
+    }
+
+    .b-mainbtn:hover {
+        transform: scale(1.1);
+    }
+
+    .b-mainbtn--secondry {
+        background: transparent;
+        border: 1px solid #D3112B;
+        color: #D3112B;
+    }
+
+    .b-mainbtn--small {
+        height: 30px;
     }
 
     /* NODE */
@@ -212,6 +234,20 @@ const remove = (node) => {
     .b-iconbtn {
         border: none;
         background: transparent;
+    }
+
+    .b-field-add {
+        margin-bottom: 20px;
+    }
+
+    .b-field-add__menu {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 10px;
+        background: #EFF2F7;
+        border-radius: 10px;
+        margin-top: 10px;
     }
 
 </style>
