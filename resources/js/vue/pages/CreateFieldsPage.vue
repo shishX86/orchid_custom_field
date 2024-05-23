@@ -6,17 +6,21 @@ const selectedField = ref('');
 const slVueTree = ref();
 
 const fields = ref([
-    { id: 1, value: 'text', title: 'Текстовое поле', isLeaf: true, data: {id: 1} },
-    { id: 2, value: 'textarea', title: 'Область текста', isLeaf: true, data: {id: 2} },
-    { id: 3, value: 'quil', title: 'Визуальный редактор', isLeaf: true, data: {id: 3} },
-    { id: 4, value: 'editorjs', title: 'Блочный редактор', isLeaf: true, data: {id: 4} },
-    { id: 5, value: 'image', title: 'Изображение', isLeaf: true, data: {id: 5} },
-    { id: 6, value: 'gallery', title: 'Галерея', isLeaf: true, data: {id: 6} },
-    { id: 7, value: 'phone', title: 'Телефон', isLeaf: true, data: {id: 7} },
-    { id: 8, value: 'email', title: 'Email', isLeaf: true, data: {id: 8} },
-    { id: 9, value: 'map', title: 'Карта', isLeaf: true, data: {id: 9} },
-    { id: 10, value: 'repeater', title: 'Повторитель полей', isLeaf: false, data: {id: 10} },
-    { id: 11, value: 'group', title: 'Группа полей', isLeaf: false, data: {id: 11} },
+    { id: 1, value: 'text', title: 'Текстовое поле', isLeaf: true },
+    { id: 2, value: 'quil', title: 'Визуальный редактор', isLeaf: true },
+    { id: 3, value: 'editorjs', title: 'Блочный редактор', isLeaf: true },
+    { id: 4, value: 'textarea', title: 'Область текста', isLeaf: true },
+    { id: 5, value: 'link', title: 'Ссылка', isLeaf: true },
+    { id: 6, value: 'phone', title: 'Телефон', isLeaf: true },
+    { id: 7, value: 'email', title: 'Email', isLeaf: true },
+    { id: 8, value: 'checkbox', title: 'Чекбокс', isLeaf: true },
+    { id: 9, value: 'select', title: 'Выбор', isLeaf: true },
+    { id: 10, value: 'image', title: 'Изображение', isLeaf: true },
+    { id: 11, value: 'video', title: 'Видео', isLeaf: true },
+    { id: 12, value: 'gallery', title: 'Галерея', isLeaf: true },
+    { id: 13, value: 'map', title: 'Карта', isLeaf: true },
+    { id: 14, value: 'group', title: 'Группа полей', isLeaf: false },
+    { id: 15, value: 'repeater', title: 'Повторитель полей', isLeaf: false },
 ]);
 
 const nodes = ref([]);
@@ -37,6 +41,10 @@ const remove = (node) => {
 
 const inputKey = (node, e) => {
     slVueTree.value.updateNode({path:node.path, patch: {data: {key : e.target.value}}})
+}
+
+const inputName = (node, e) => {
+    slVueTree.value.updateNode({path:node.path, patch: {data: {name : e.target.value}}})
 }
 
 </script>
@@ -76,8 +84,9 @@ const inputKey = (node, e) => {
                     {{ node.title }}
                 </div>
 
-                <div>
-                    <input type="text" @input="inputKey(node, $event)" placeholder="Ключ поля" >
+                <div class="b-field-diplayer__inputs">
+                    <input class="b-input" type="text" @input="inputName(node, $event)" :value="node.data.name" placeholder="Название">
+                    <input class="b-input" type="text" @input="inputKey(node, $event)" :value="node.data.key" placeholder="Ключ поля">
                 </div>
 
                 <button type="button" @click="remove(node)" class="b-iconbtn">
@@ -160,6 +169,7 @@ const inputKey = (node, e) => {
         align-items: center;
         gap: 12px;
         margin-bottom: 12px;
+        flex: 1;
     }
 
     .sl-vue-tree-next-toggle {
@@ -175,10 +185,17 @@ const inputKey = (node, e) => {
         border: 2px dashed #e1e1e4;
         margin-bottom: 12px;
         margin-left: 25px;
+        background-color: rgba(0, 0, 0, 0.03);
     }
 
     .sl-vue-tree-next-node-is-leaf .sl-vue-tree-next-gap {
         display: none;
+    }
+
+    .b-input {
+        border: 1px solid #e1e1e4;
+        border-radius: 7px;
+        padding: 5px 10px;
     }
 
     .b-mainbtn {
@@ -229,6 +246,22 @@ const inputKey = (node, e) => {
         cursor: pointer;
         display: flex;
         gap: 12px;
+        align-items: center;
+        flex: 1;
+    }
+
+    .b-field-diplayer__title {
+        width: 175px;
+    }
+
+    .b-field-diplayer__inputs {
+        flex: 1;
+        display: flex;
+        gap: 10px;
+    }
+
+    .b-field-diplayer__inputs .b-input {
+        flex: 1;
     }
 
     .b-iconbtn {
