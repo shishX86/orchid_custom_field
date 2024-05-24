@@ -50,10 +50,10 @@ const inputName = (node, e) => {
 </script>
 
 <template>
-    <h2 class="b-title">Конструктор компонента</h2>
+    <h2 class="b-title">Конструктор данных компонента</h2>
 
     <div class="b-field-add">
-        <button type="button" @click="selectField" class="b-mainbtn">
+        <button type="button" @click="selectField" class="b-mainbtn b-field-add__btn">
             + добавить поле 
             <span class="b-mainbtn__arrow" :class="{'b-mainbtn__arrow--invert': isDropDownOpen}">
                 <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +98,7 @@ const inputName = (node, e) => {
         </template>
     </sl-vue-tree-next>
 
-    <div v-if="!nodes.length">
+    <div class="b-field-add__info" v-if="!nodes.length">
         Поля пока не добавлены
     </div>
 </template>
@@ -127,7 +127,7 @@ const inputName = (node, e) => {
         padding-bottom: 4px;
     }
     .sl-vue-tree-next-selected > .sl-vue-tree-next-node-item .b-field-diplayer__node {
-        background-color: #e1e1e4;
+        background-color: #fff;
     }
     .sl-vue-tree-next-node-list {
         position: relative;
@@ -143,7 +143,6 @@ const inputName = (node, e) => {
         outline: 1px solid rgba(100, 100, 255, 0.5);
     }
     .sl-vue-tree-next-gap {
-        width: 20px;
         min-height: 1px;
     }
     .sl-vue-tree-next-sidebar {
@@ -168,8 +167,17 @@ const inputName = (node, e) => {
         display: flex;
         align-items: center;
         gap: 12px;
-        margin-bottom: 12px;
         flex: 1;
+        z-index: 5;
+        position: relative;
+    }
+
+    .sl-vue-tree-next-node {
+        margin-bottom: 12px;
+    }
+
+    .sl-vue-tree-next-node-is-folder .sl-vue-tree-next-title {
+        margin-bottom: 0;
     }
 
     .sl-vue-tree-next-toggle {
@@ -180,16 +188,23 @@ const inputName = (node, e) => {
 
     .sl-vue-tree-next {
         border-radius: 12px;
-        padding: 12px;
-        padding-bottom: 0;
-        border: 2px dashed #e1e1e4;
+
+        padding: 17px 12px 1px 12px;
+        border: none;
+        /*border: 2px dashed #e1e1e4;*/
         margin-bottom: 12px;
         margin-left: 25px;
-        background-color: rgba(0, 0, 0, 0.03);
+        background-color: rgba(0, 0, 10, 0.07);
     }
 
     .sl-vue-tree-next-node-is-leaf .sl-vue-tree-next-gap {
         display: none;
+    }
+
+    .sl-vue-tree-next-node-is-folder + .sl-vue-tree-next {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        margin-top: -5px;
     }
 
     .b-input {
@@ -241,13 +256,15 @@ const inputName = (node, e) => {
     /* NODE */
     .b-field-diplayer__node {
         padding: 12px;
-        border: 1px solid #e1e1e4;
+        
         border-radius: 10px;
         cursor: pointer;
         display: flex;
         gap: 12px;
         align-items: center;
         flex: 1;
+        background: #fff;
+        border-radius: 12px;
     }
 
     .b-field-diplayer__title {
@@ -267,20 +284,40 @@ const inputName = (node, e) => {
     .b-iconbtn {
         border: none;
         background: transparent;
+        transition: transform .3s ease-in-out;
+    }
+
+    .b-iconbtn:hover {
+        transform: scale(1.3);
     }
 
     .b-field-add {
-        margin-bottom: 20px;
+        margin-bottom: 0px;
+    }
+
+    .b-field-add__btn {
+        margin-bottom: 12px;
     }
 
     .b-field-add__menu {
         display: flex;
         gap: 10px;
         flex-wrap: wrap;
-        padding: 10px;
-        background: #EFF2F7;
+        padding: 12px 12px 20px 12px;
+        background-color: rgba(239, 239, 240, 1);
         border-radius: 10px;
-        margin-top: 10px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-bottom: -12px;
+        position: relative;
+        z-index: 7;
     }
 
+    .b-field-add__info {
+        color: #676767;
+        padding: 12px;
+        background-color: rgba(239, 239, 240, 1);
+        text-align: center;
+        border-radius: 12px;
+    }
 </style>
