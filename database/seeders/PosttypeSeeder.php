@@ -13,7 +13,7 @@ class PosttypeSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->create('page', 'Страница');
+        $this->create('page', 'Типовые страницы');
         $this->create('event', 'Событие');
         $this->create('news', 'Новость');
         $this->create('article', 'Статья');

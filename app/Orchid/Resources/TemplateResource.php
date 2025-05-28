@@ -11,14 +11,14 @@ use Orchid\Screen\Fields\Select;
 use Orchid\Screen\TD;
 use Orchid\Screen\Fields\Relation;
 
-class FieldResource extends Resource
+class TemplateResource extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Field::class;
+    public static $model = \App\Models\Template::class;
 
     public static function singularLabel(): string
     {

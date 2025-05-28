@@ -15,12 +15,12 @@ class Post extends Model
     use HasFactory, AsSource, Filterable, Attachable;
 
     protected $with = [
-        'fields'
+        'templates'
     ];
 
-    public function fields(): BelongsToMany
+    public function templates(): BelongsToMany
     {
-        return $this->belongsToMany(Field::class);
+        return $this->belongsToMany(Template::class);
     }
 
     public function posttype(): BelongsTo

@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('field_post', function (Blueprint $table) {
+        Schema::create('templates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('field_id')->constrained();
-            $table->foreignId('post_id')->constrained();
+            $table->string('name')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('visibility')->nullable();
+            $table->json('content')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('field_post');
+        Schema::dropIfExists('templates');
     }
 };

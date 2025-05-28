@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Field;
 use App\Models\Post;
+use App\Models\Template;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class FieldPostSeeder extends Seeder
+class TemplatePostSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,11 +18,11 @@ class FieldPostSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         $posts = Post::all();
-        $fieldsCount = range(1, Field::count());
+        $templateCount = range(1, Template::count());
 
-        $posts->each(function($post) use ($faker, $fieldsCount) {
+        $posts->each(function($post) use ($faker, $templateCount) {
             $randomNumber = $faker->numberBetween(1, 3);
-            $post->fields()->attach($faker->randomElements($fieldsCount, $randomNumber));
+            $post->templates()->attach($faker->randomElements($templateCount, $randomNumber));
         });
     }
 }

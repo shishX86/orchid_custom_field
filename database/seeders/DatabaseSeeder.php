@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Field;
 use App\Models\Post;
-use App\Models\Posttype;
+use App\Models\Template;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -20,23 +18,21 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(PosttypeSeeder::class);
 
-        if(Field::count() === 0) {
+        if(Template::count() === 0) {
             $this->command->info("Наполнения полей");
-            //Field::factory(5)->create();
-            $this->call(FieldsSeeder::class);
+            $this->call(TemplateSeeder::class);
             $this->command->info("Готово!");
         }
 
         if(Post::count() === 0) {
             $this->command->info("Наполнения постов");
-            //Post::factory(10)->create();
             $this->call(PostSeeder::class);
             $this->command->info("Готово!");
         }
 
-        if(DB::table('field_post')->count() === 0) {
+        if(DB::table('post_template')->count() === 0) {
             $this->command->info("Наполнения связей постов с полями");
-            $this->call(FieldPostSeeder::class);
+            $this->call(TemplatePostSeeder::class);
             $this->command->info("Готово!");
         }
 
