@@ -5,11 +5,13 @@ namespace App\Orchid\Resources;
 use App\Models\Post;
 use App\Models\Posttype;
 use App\Orchid\Fields\EditorJSField;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Orchid\Crud\Resource;
+use Orchid\Crud\ResourceRequest;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\TD;
-use Orchid\Screen\Fields\Relation;
 
 class TemplateResource extends Resource
 {
@@ -46,10 +48,10 @@ class TemplateResource extends Resource
                 ])
                 ->title('Область видимости'),
             
-            Select::make('posttypes')
-                ->fromModel(Posttype::class, 'name')
-                ->empty('На всех')
-                ->title('Отображать на типах страниц'),
+            // Select::make('posttypes')
+            //     ->fromModel(Posttype::class, 'name')
+            //     ->empty('На всех')
+            //     ->title('Отображать на типах страниц'),
 
             Select::make('posts2')
                 ->fromModel(Post::class, 'name')
@@ -98,5 +100,14 @@ class TemplateResource extends Resource
     public function filters(): array
     {
         return [];
+    }
+
+    public function onSave(ResourceRequest $request, Model $model)
+    {
+        $data = $request->all();
+        $model->slug = Str::slug($data['name']);
+        $model->visibility = $data['visibility'] ?? null;
+        $model->content = $data['content'];
+        $model->save();
     }
 }

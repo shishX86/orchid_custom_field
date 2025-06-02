@@ -101,6 +101,8 @@ const inputName = (node, e) => {
     <div class="b-field-add__info" v-if="!nodes.length">
         Поля пока не добавлены
     </div>
+
+    <input type="hidden" name="model[content]" :value="nodes ? JSON.stringify(nodes) : ''">
 </template>
 
 <style>
