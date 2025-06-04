@@ -39,6 +39,8 @@ class TemplateResource extends Resource
      */
     public function fields(): array
     {
+        $model = self::$model::find(request('id'));
+
         return [
             Input::make('name')->title('Название набора'),
             Select::make('visibility')
@@ -58,8 +60,9 @@ class TemplateResource extends Resource
                 ->empty('На всех')
                 ->title('Отображать на конкретных страницах'),
 
-            EditorJSField::make('editor')
-                ->containerid('editorjs')
+            EditorJSField::make('content')
+                ->containerid('templateEditor')
+                ->initialData($model->content)
         ];
     }
 

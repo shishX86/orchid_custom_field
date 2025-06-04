@@ -1,9 +1,15 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { SlVueTreeNext } from 'sl-vue-tree-next'
 
 const selectedField = ref('');
 const slVueTree = ref();
+
+const props = defineProps({
+    initialData: {
+        type: Array
+    }
+});
 
 const fields = ref([
     { id: 1, value: 'text', title: 'Текстовое поле', isLeaf: true },
@@ -46,6 +52,10 @@ const inputKey = (node, e) => {
 const inputName = (node, e) => {
     slVueTree.value.updateNode({path:node.path, patch: {data: {name : e.target.value}}})
 }
+
+onMounted(() => {
+    nodes.value = props.initialData;
+})
 
 </script>
 
