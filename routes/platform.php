@@ -20,6 +20,8 @@ use App\Orchid\Screens\TestScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
+use App\Orchid\Screens\Template\TemplateListScreen;
+use App\Orchid\Screens\Template\TemplateScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -37,6 +39,13 @@ use Tabuna\Breadcrumbs\Trail;
 // Main
 Route::screen('/main', PlatformScreen::class)
     ->name('platform.main');
+
+// Template Screens
+Route::screen('templates', TemplateListScreen::class)
+    ->name('platform.template.list');
+
+Route::screen('template/{template?}', TemplateScreen::class)
+    ->name('platform.template.edit');
 
 Route::screen('/fields/create', CreateFields::class)
     ->name('platform.fields.create');

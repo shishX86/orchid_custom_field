@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Orchid;
 
 use App\Models\Posttype;
+use App\Models\Template;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
@@ -50,8 +51,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->active('*/admin/crud/list/post-resources*')
                 ->list($postList),
 
-            Menu::make('Сквозные блоки')
-            ->icon('code')
+            Menu::make('Компоненты')
+                ->icon('grid')
+                ->route('platform.template.list')
+                ->title('Контент'),
         ];
 
         return $menu;
