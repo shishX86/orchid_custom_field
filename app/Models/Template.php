@@ -12,6 +12,13 @@ class Template extends Model
 {
     use HasFactory, AsSource, Filterable, Attachable;
 
+    protected $fillable = [
+        'name',
+        'slug',
+        'visibility',
+        'content'
+    ];
+
     public function posts()
     {
         return $this->belongsToMany(Post::class);

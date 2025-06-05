@@ -22,9 +22,7 @@ class PostFactory extends Factory
             'slug' => $this->faker->slug(2),
             'description' => $this->faker->realText(),
             'posttype_id' => Posttype::inRandomOrder()->first()->id,
-            'content' => json_encode([
-                'test' => 'test'
-            ]),
+            'content' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ];

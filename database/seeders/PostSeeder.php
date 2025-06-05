@@ -20,9 +20,7 @@ class PostSeeder extends Seeder
                 'slug' => 'home',
                 'description' => 'Описание главной страницы',
                 'posttype_id' => 1,
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -31,9 +29,7 @@ class PostSeeder extends Seeder
                 'slug' => 'contacts',
                 'description' => 'Описание страницы контактов',
                 'posttype_id' => 1,
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -42,9 +38,7 @@ class PostSeeder extends Seeder
                 'slug' => 'about',
                 'description' => 'Описание страницы О компании',
                 'posttype_id' => 1,
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
@@ -57,9 +51,7 @@ class PostSeeder extends Seeder
                 'slug' => 'musey_horse',
                 'description' => 'Описание музея лошади',
                 'posttype_id' => 2,
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -68,9 +60,7 @@ class PostSeeder extends Seeder
                 'slug' => 'film_road_road',
                 'description' => 'Описание фильма в дорогу, в дорогу',
                 'posttype_id' => 2,
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -79,9 +69,7 @@ class PostSeeder extends Seeder
                 'slug' => 'about',
                 'description' => 'Описание фильма Волга - русская река',
                 'posttype_id' => 2,
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
@@ -94,9 +82,7 @@ class PostSeeder extends Seeder
                 'slug' => 'night_town',
                 'description' => 'Описание «Сиреневая ночь в Музейном городе ВДНХ»: экскурсии, лекции, фотовыставка, пленэры',
                 'posttype_id' => 3,
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -105,9 +91,7 @@ class PostSeeder extends Seeder
                 'slug' => 'ostankino',
                 'description' => 'Описание паркa «Останкино»',
                 'posttype_id' => 3,
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
@@ -120,9 +104,7 @@ class PostSeeder extends Seeder
                 'slug' => 'eco_day',
                 'description' => 'Описание Как провести День экологического образования на ВДНХ',
                 'posttype_id' => 4,
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -131,9 +113,7 @@ class PostSeeder extends Seeder
                 'slug' => 'moscow_fest',
                 'description' => 'Описание Джигитовка и конкур: ВДНХ приглашает на VIII Открытый московский фестиваль конного искусства и спорта',
                 'posttype_id' => 4,
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

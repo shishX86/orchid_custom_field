@@ -18,9 +18,7 @@ class TemplateSeeder extends Seeder
                 'name' => 'Хэдер',
                 'slug' => 'header',
                 'visibility' => 'global',
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => '[{"id": 1, "data": {"key": "qwe", "name": "qwe"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": false}, {"id": 15, "data": {"key": "аввап", "name": "ываыва"}, "title": "Повторитель полей", "value": "repeater", "isLeaf": false, "children": [{"id": 1, "data": {"key": "ппп", "name": "ыва"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": false}, {"id": 1, "data": {"key": "вапап", "name": "ыапыв"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": true}], "isSelected": false}]',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -28,9 +26,7 @@ class TemplateSeeder extends Seeder
                 'name' => 'Футер',
                 'slug' => 'footer',
                 'visibility' => 'global',
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => '[{"id": 1, "data": {"key": "qwe", "name": "qwe"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": false}, {"id": 15, "data": {"key": "аввап", "name": "ываыва"}, "title": "Повторитель полей", "value": "repeater", "isLeaf": false, "children": [{"id": 1, "data": {"key": "ппп", "name": "ыва"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": false}, {"id": 1, "data": {"key": "вапап", "name": "ыапыв"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": true}], "isSelected": false}]',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -38,9 +34,7 @@ class TemplateSeeder extends Seeder
                 'name' => 'Слайдер',
                 'slug' => 'slider',
                 'visibility' => 'local',
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => '[{"id": 1, "data": {"key": "qwe", "name": "qwe"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": false}, {"id": 15, "data": {"key": "аввап", "name": "ываыва"}, "title": "Повторитель полей", "value": "repeater", "isLeaf": false, "children": [{"id": 1, "data": {"key": "ппп", "name": "ыва"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": false}, {"id": 1, "data": {"key": "вапап", "name": "ыапыв"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": true}], "isSelected": false}]',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -48,9 +42,7 @@ class TemplateSeeder extends Seeder
                 'name' => 'FAQ',
                 'slug' => 'faq',
                 'visibility' => 'local',
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => '[{"id": 1, "data": {"key": "qwe", "name": "qwe"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": false}, {"id": 15, "data": {"key": "аввап", "name": "ываыва"}, "title": "Повторитель полей", "value": "repeater", "isLeaf": false, "children": [{"id": 1, "data": {"key": "ппп", "name": "ыва"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": false}, {"id": 1, "data": {"key": "вапап", "name": "ыапыв"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": true}], "isSelected": false}]',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -58,9 +50,7 @@ class TemplateSeeder extends Seeder
                 'name' => 'Баннер',
                 'slug' => 'home',
                 'visibility' => 'local',
-                'content' => json_encode([
-                    'test' => 'test'
-                ]),
+                'content' => '[{"id": 1, "data": {"key": "qwe", "name": "qwe"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": false}, {"id": 15, "data": {"key": "аввап", "name": "ываыва"}, "title": "Повторитель полей", "value": "repeater", "isLeaf": false, "children": [{"id": 1, "data": {"key": "ппп", "name": "ыва"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": false}, {"id": 1, "data": {"key": "вапап", "name": "ыапыв"}, "title": "Текстовое поле", "value": "text", "isLeaf": true, "isSelected": true}], "isSelected": false}]',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

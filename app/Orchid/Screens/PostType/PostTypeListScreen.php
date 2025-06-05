@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Orchid\Screens\Template;
+namespace App\Orchid\Screens\PostType;
 
-use App\Models\Template;
+use App\Models\PostType;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Group;
@@ -11,7 +11,7 @@ use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
 use Illuminate\Http\Request;
 
-class TemplateListScreen extends Screen
+class PostTypeListScreen extends Screen
 {
     /**
      * Fetch data to be displayed on the screen.
@@ -21,7 +21,7 @@ class TemplateListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'templates' => Template::filters()->defaultSort('id', 'desc')->paginate()
+            'postTypes' => PostType::filters()->defaultSort('id', 'desc')->paginate()
         ];
     }
 
@@ -32,7 +32,7 @@ class TemplateListScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Компоненты';
+        return 'Типы записей';
     }
 
     /**
@@ -45,7 +45,7 @@ class TemplateListScreen extends Screen
         return [
             Link::make('Создать')
                 ->icon('plus')
-                ->route('platform.template.create')
+                ->route('platform.posttype.create')
         ];
     }
 
@@ -57,29 +57,30 @@ class TemplateListScreen extends Screen
     public function layout(): iterable
     {
         return [
-            Layout::table('templates', [
+            Layout::table('postTypes', [
                 TD::make('id'),
                 TD::make('name', 'Название')
-                    ->render(fn (Template $template) => Link::make($template->name)
-                        ->route('platform.template.edit', $template)),
+                    ->render(fn (PostType $postType) => Link::make($postType->name)
+                        ->route('platform.posttype.edit', [$postType->id])),
+                TD::make('slug', 'Slug'),
                 TD::make('visibility', 'Видимость')
-                    ->render(function(Template $template) {
-                        return ($template->visibility === 'global')
+                    ->render(function(PostType $postType) {
+                        return ($postType->visibility === 'global')
                             ? 'Сквозной'
                             : 'Локальный';
                     }),
                 TD::make(__('Действия'))
                     ->align(TD::ALIGN_CENTER)
                     ->width('100px')
-                    ->render(function (Template $template) {
+                    ->render(function (PostType $postType) {
                         return Group::make([
                             Link::make('Редактировать')
                                 ->icon('pencil')
-                                ->route('platform.template.edit', $template),
+                                ->route('platform.posttype.edit', [$postType->id]),
                             Button::make('Удалить')
                                 ->icon('trash')
-                                ->confirm('Вы уверены, что хотите удалить этот компонент?')
-                                ->method('remove', ['id' => $template->id])
+                                ->confirm('Вы уверены, что хотите удалить этот тип записи?')
+                                ->method('remove', ['id' => $postType->id])
                         ]);
                     }),
             ])
@@ -89,14 +90,14 @@ class TemplateListScreen extends Screen
     /**
      * @param Request $request
      */
-    public function remove(Request $request, Template $template): void
+    public function remove(Request $request): void
     {
-        $template = Template::findOrFail($request->get('id'));
+        $postType = PostType::findOrFail($request->get('id'));
         
-        // Удаляем все связи с постами
-        $template->posts()->detach();
+        // Удаляем все связанные записи
+        $postType->posts()->delete();
         
-        // Теперь можно удалить сам шаблон
-        $template->delete();
+        // Теперь можно удалить сам тип записи
+        $postType->delete();
     }
 } 

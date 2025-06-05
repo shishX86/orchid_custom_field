@@ -54,7 +54,7 @@ const inputName = (node, e) => {
 }
 
 onMounted(() => {
-    nodes.value = props.initialData;
+    nodes.value = props.initialData ? props.initialData : [];
 })
 
 </script>
@@ -112,7 +112,7 @@ onMounted(() => {
         Поля пока не добавлены
     </div>
 
-    <input type="hidden" name="model[content]" :value="nodes ? JSON.stringify(nodes) : ''">
+    <input type="hidden" name="template[content]" :value="nodes ? JSON.stringify(nodes) : ''">
 </template>
 
 <style>

@@ -21,9 +21,7 @@ class FieldFactory extends Factory
         return [
             'name' => $this->faker->randomElement($titles),
             'slug' => $this->faker->slug(2),
-            'content' => json_encode([
-                'test' => 'test'
-            ]),
+            'content' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ];

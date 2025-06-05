@@ -22,6 +22,8 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\Template\TemplateListScreen;
 use App\Orchid\Screens\Template\TemplateScreen;
+use App\Orchid\Screens\PostType\PostTypeListScreen;
+use App\Orchid\Screens\PostType\PostTypeScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -44,8 +46,14 @@ Route::screen('/main', PlatformScreen::class)
 Route::screen('templates', TemplateListScreen::class)
     ->name('platform.template.list');
 
-Route::screen('template/{template?}', TemplateScreen::class)
+Route::screen('template/create', TemplateScreen::class)
+    ->name('platform.template.create');
+
+Route::screen('template/{template}/edit', TemplateScreen::class)
     ->name('platform.template.edit');
+
+Route::delete('template/{template}', [TemplateListScreen::class, 'remove'])
+    ->name('platform.template.remove');
 
 Route::screen('/fields/create', CreateFields::class)
     ->name('platform.fields.create');
@@ -118,5 +126,18 @@ Route::screen('/examples/layouts', ExampleLayoutsScreen::class)->name('platform.
 Route::screen('/examples/grid', ExampleGridScreen::class)->name('platform.example.grid');
 Route::screen('/examples/charts', ExampleChartsScreen::class)->name('platform.example.charts');
 Route::screen('/examples/cards', ExampleCardsScreen::class)->name('platform.example.cards');
+
+// PostType Screens
+Route::screen('posttypes', PostTypeListScreen::class)
+    ->name('platform.posttype.list');
+
+Route::screen('posttype/create', PostTypeScreen::class)
+    ->name('platform.posttype.create');
+
+Route::screen('posttype/{postType}/edit', PostTypeScreen::class)
+    ->name('platform.posttype.edit');
+
+Route::delete('posttype/{postType}', [PostTypeListScreen::class, 'remove'])
+    ->name('platform.posttype.remove');
 
 //Route::screen('idea', Idea::class, 'platform.screens.idea');

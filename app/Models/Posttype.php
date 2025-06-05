@@ -13,6 +13,11 @@ class Posttype extends Model
 {
     use HasFactory, AsSource, Filterable, Attachable;
 
+    protected $fillable = [
+        'name',
+        'slug'
+    ];
+
     /**
      * Get the comments for the blog post.
      */

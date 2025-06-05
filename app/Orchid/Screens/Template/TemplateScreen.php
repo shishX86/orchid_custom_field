@@ -48,10 +48,12 @@ class TemplateScreen extends Screen
      */
     public function commandBar(): iterable
     {
+        $saveButton = $this->template->exists ? 'Обновить' : 'Создать';
+
         return [
-            Button::make('Сохранить')
+            Button::make($saveButton)
                 ->icon('pencil')
-                ->method('save')
+                ->method('createOrUpdate')
         ];
     }
 
@@ -81,7 +83,7 @@ class TemplateScreen extends Screen
 
                 EditorJSField::make('template.content')
                     ->containerid('editorjs')
-                    ->initialData($this->template->content ?? null)
+                    ->initialData($this->template->content ?? json_encode([]))
             ])
         ];
     }
@@ -92,16 +94,22 @@ class TemplateScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function save(Template $template, Request $request)
+    public function createOrUpdate(Template $template, Request $request)
     {
         $data = $request->get('template');
         
         $template->fill([
             'name' => $data['name'],
             'slug' => Str::slug($data['name']),
-            'visibility' => $data['visibility'] ?? null,
-            'content' => $data['content']
-        ])->save();
+            'visibility' => $data['visibility'] ?? 'local',
+            'content' => $data['content'] ?? '[]'
+        ]);
+
+        if (!$template->exists) {
+            $template->save();
+        } else {
+            $template->update();
+        }
 
         return redirect()->route('platform.template.list');
     }

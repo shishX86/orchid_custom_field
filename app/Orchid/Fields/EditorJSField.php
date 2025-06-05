@@ -9,7 +9,7 @@ class EditorJSField extends Field {
     protected $view = 'fields.vue-editor';
 
     protected $attributes = [
-        'initialData' => null,
+        'initialData' => false,
         'containerid' => 'editorjs'
     ];
 }
