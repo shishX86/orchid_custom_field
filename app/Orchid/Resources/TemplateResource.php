@@ -43,6 +43,7 @@ class TemplateResource extends Resource
 
         return [
             Input::make('name')->title('Название набора'),
+            Input::make('slug')->title('Уникальный идентификатор'),
             Select::make('visibility')
                 ->options([
                     'local'   => 'Локальный',
@@ -76,6 +77,7 @@ class TemplateResource extends Resource
         return [
             TD::make('id'),
             TD::make('name', 'Название'),
+            TD::make('slug', 'Уникальный идентификатор'),
             TD::make('visibility', 'Видимость')
                 ->render(function($model) {
                     return ($model->visibility === 'global')
@@ -108,7 +110,8 @@ class TemplateResource extends Resource
     public function onSave(ResourceRequest $request, Model $model)
     {
         $data = $request->all();
-        $model->slug = Str::slug($data['name']);
+        $model->slug = Str::slug($data['slug']);
+        $model->name = $data['name'];
         $model->visibility = $data['visibility'] ?? null;
         $model->content = $data['content'];
         $model->save();
