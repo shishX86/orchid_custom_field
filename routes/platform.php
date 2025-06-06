@@ -24,6 +24,8 @@ use App\Orchid\Screens\Template\TemplateListScreen;
 use App\Orchid\Screens\Template\TemplateScreen;
 use App\Orchid\Screens\PostType\PostTypeListScreen;
 use App\Orchid\Screens\PostType\PostTypeScreen;
+use App\Orchid\Screens\Post\PostListScreen;
+use App\Orchid\Screens\Post\PostScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -139,5 +141,18 @@ Route::screen('posttype/{postType}/edit', PostTypeScreen::class)
 
 Route::delete('posttype/{postType}', [PostTypeListScreen::class, 'remove'])
     ->name('platform.posttype.remove');
+
+// Post Screens
+Route::screen('posts', PostListScreen::class)
+    ->name('platform.post.list');
+
+Route::screen('post/create', PostScreen::class)
+    ->name('platform.post.create');
+
+Route::screen('post/{post}/edit', PostScreen::class)
+    ->name('platform.post.edit');
+
+Route::delete('post/{post}', [PostListScreen::class, 'remove'])
+    ->name('platform.post.remove');
 
 //Route::screen('idea', Idea::class, 'platform.screens.idea');

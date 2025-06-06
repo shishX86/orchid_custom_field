@@ -18,6 +18,14 @@ class Post extends Model
         'templates'
     ];
 
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+        'posttype_id',
+        'content'
+    ];
+
     public function templates(): BelongsToMany
     {
         return $this->belongsToMany(Template::class);
