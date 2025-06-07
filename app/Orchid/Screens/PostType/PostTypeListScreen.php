@@ -6,10 +6,16 @@ use App\Models\PostType;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Group;
+use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Label;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
 use Illuminate\Http\Request;
+use Orchid\Support\Facades\Toast;
+use Orchid\Screen\Actions\ModalToggle;
+use Orchid\Support\Color;
 
 class PostTypeListScreen extends Screen
 {
@@ -77,27 +83,91 @@ class PostTypeListScreen extends Screen
                             Link::make('Редактировать')
                                 ->icon('pencil')
                                 ->route('platform.posttype.edit', [$postType->id]),
-                            Button::make('Удалить')
+                            ModalToggle::make('Удалить')
                                 ->icon('trash')
-                                ->confirm('Вы уверены, что хотите удалить этот тип записи?')
-                                ->method('remove', ['id' => $postType->id])
+                                ->modal('removePostTypeModal')
+                                ->method('removePostType')
+                                ->modalTitle('Удаление типа страницы')
+                                ->asyncParameters([
+                                    'postType' => $postType->id
+                                ])
                         ]);
                     }),
-            ])
+            ]),
+
+            Layout::modal('removePostTypeModal', [
+                    Layout::rows([
+                        Select::make('new_posttype_id')
+                            ->title('К какому типу перепривязать страницы?')
+                            ->fromQuery(
+                                PostType::query()->where('id', '!=', request('postType')), 
+                                'name', 
+                                'id'
+                            )
+                            ->help('Страницы будут перемещены в выбранный тип')
+                            ->empty(false)
+                            ->required()
+                    ])
+                ])
+                ->applyButton('Удалить')
+                ->closeButton('Отмена')
+                ->async('asyncGetPostType')
         ];
     }
 
     /**
      * @param Request $request
      */
-    public function remove(Request $request): void
+    public function removePostType(Request $request): void
     {
-        $postType = PostType::findOrFail($request->get('id'));
+        $postType = PostType::findOrFail($request->get('postType'));
+        $newPostTypeId = $request->input('new_posttype_id');
         
-        // Удаляем все связанные записи
-        $postType->posts()->delete();
+        // Если есть новый тип страницы, перемещаем все страницы в него
+        if ($newPostTypeId) {
+            $postType->posts()->update(['posttype_id' => $newPostTypeId]);
+            Toast::success('Страницы перемещены в другой тип');
+        } else {
+            // Если нового типа нет, удаляем страницы
+            $postType->posts()->delete();
+            Toast::info('Связанные страницы удалены');
+        }
         
-        // Теперь можно удалить сам тип записи
+        // Удаляем сам тип страницы
         $postType->delete();
+        
+        Toast::success('Тип страницы успешно удален');
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function reassignPosts(Request $request): void
+    {
+        $oldPostType = PostType::findOrFail($request->get('id'));
+        $newPostTypeId = $request->get('new_posttype_id');
+        
+        // Перемещаем все страницы в новый тип
+        $oldPostType->posts()->update(['posttype_id' => $newPostTypeId]);
+        
+        // Удаляем старый тип страницы
+        $oldPostType->delete();
+        
+        Toast::success('Страницы успешно перемещены, старый тип страницы удален');
+    }
+    
+    public function asyncGetPostType(PostType $postType)
+    {
+        $filteredPostTypes = PostType::where('id', '!=', $postType->id)->get();
+        $output = $filteredPostTypes->map(function($postType) {
+            return [
+                'id' => $postType->id,
+                'text' => $postType->name
+            ];
+        })->toArray();
+
+        return [
+            'filteredPostTypes' => $output
+        ];
     }
 } 

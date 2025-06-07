@@ -94,7 +94,7 @@ class PostTypeScreen extends Screen
         
         $postType->fill([
             'name' => $data['name'],
-            'slug' => Str::slug($data['name']),
+            'slug' => Str::slug($data['slug']),
             'visibility' => $data['visibility'] ?? 'local',
             'description' => $data['description'] ?? null
         ]);

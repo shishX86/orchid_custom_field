@@ -37,12 +37,17 @@ class PlatformProvider extends OrchidServiceProvider
     {
         $posttypes = Posttype::all();
 
-        $postList = $posttypes->map(function($posttype) {
+        $postList = collect([
+            Menu::make('Все')
+                ->icon('bs.collection')
+                ->route('platform.post.list')
+                ->active('*/posts')
+        ])->merge($posttypes->map(function($posttype) {
             return Menu::make($posttype->name)
                 ->icon('bs.book')
                 ->route('platform.post.list', ['posttype' => $posttype->id])
                 ->active('*/posts?posttype='.$posttype->id);
-            })
+            }))
             ->toArray();
 
         $menu = [
