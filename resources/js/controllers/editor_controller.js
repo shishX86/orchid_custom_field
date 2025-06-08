@@ -7,8 +7,16 @@ import TestTool from './../editorjs/TestTool'
 import RepeaterTool from './../editorjs/RepeaterTool'
 
 export default class extends window.Controller {
+    static values = {
+        blocksData: Array
+    }
+
     connect() {
         const id = this.data.get('containerId') ?? 'editorjs'
+        const blocksData = this.blocksDataValue
+
+        //TODO: Надо перебрать все блоки и добавить их в tools editorjs
+        console.log('Blocks Data:', JSON.parse(blocksData[0]))
 
         const editor = new EditorJS({
             /**

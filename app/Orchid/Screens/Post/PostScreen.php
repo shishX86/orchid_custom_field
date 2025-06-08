@@ -4,6 +4,7 @@ namespace App\Orchid\Screens\Post;
 
 use App\Models\Post;
 use App\Models\Posttype;
+use App\Models\Template;
 use App\Orchid\Fields\PageConstructor;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
@@ -91,6 +92,7 @@ class PostScreen extends Screen
 
                 PageConstructor::make('post.editor')
                     ->title('Конструктор страницы')
+                    ->blocksData(json_encode(Template::all()->pluck('content')->toArray()))
             ])
         ];
     }
