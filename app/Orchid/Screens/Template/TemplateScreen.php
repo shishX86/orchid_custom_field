@@ -68,6 +68,9 @@ class TemplateScreen extends Screen
             Layout::rows([
                 Input::make('template.name')
                     ->title('Название набора'),
+
+                Input::make('template.slug')
+                    ->title('Уникальный идентификатор'),
                 
                 Select::make('template.visibility')
                     ->options([
@@ -76,6 +79,7 @@ class TemplateScreen extends Screen
                     ])
                     ->title('Область видимости'),
 
+                //TODO: Изменить это на выбор типа поста, а не конкретную страницу
                 Select::make('template.posts')
                     ->fromModel(\App\Models\Post::class, 'name')
                     ->empty('На всех')
