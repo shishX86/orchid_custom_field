@@ -104,7 +104,7 @@ class TemplateScreen extends Screen
         
         $template->fill([
             'name' => $data['name'],
-            'slug' => Str::slug($data['name']),
+            'slug' => Str::slug($data['slug']),
             'visibility' => $data['visibility'] ?? 'local',
             'content' => $data['content'] ?? '[]'
         ]);
