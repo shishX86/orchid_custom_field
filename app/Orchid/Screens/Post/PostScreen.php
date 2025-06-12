@@ -92,7 +92,7 @@ class PostScreen extends Screen
 
                 PageConstructor::make('post.editor')
                     ->title('Конструктор страницы')
-                    ->blocksData(json_encode(Template::all()->pluck('content')->toArray()))
+                    ->blocksData(json_encode(Template::all()->toArray()))
             ])
         ];
     }
