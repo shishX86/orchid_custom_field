@@ -27,6 +27,7 @@ const fields = ref([
     { id: 13, value: 'map', title: 'Карта', isLeaf: true },
     { id: 14, value: 'group', title: 'Группа полей', isLeaf: false },
     { id: 15, value: 'repeater', title: 'Повторитель полей', isLeaf: false },
+    { id: 16, value: 'posttypes_list', title: 'Список типов постов', isLeaf: true },
 ]);
 
 const nodes = ref([]);

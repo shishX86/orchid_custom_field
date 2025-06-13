@@ -1,10 +1,5 @@
 import EditorJS from '@editorjs/editorjs';
-import Header from '@editorjs/header';
-import RawTool from '@editorjs/raw';
-import SimpleImage from "@editorjs/simple-image";
 import DragDrop from 'editorjs-drag-drop';
-import TestTool from './../editorjs/TestTool'
-import AbstractTool from './../editorjs/AbstractTool'
 import DynamicTool from './../editorjs/DynamicTool'
 
 export default class extends window.Controller {

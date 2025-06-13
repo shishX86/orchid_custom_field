@@ -1,5 +1,6 @@
 import Sortable from 'sortablejs/modular/sortable.complete.esm.js';
 
+//TODO: Потом удалить этот файл
 export default class RepeaterTool {
     static get toolbox() {
         return {
